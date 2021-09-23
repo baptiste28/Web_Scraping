@@ -57,31 +57,34 @@ def find_rows(table):
         #print(b)
     return spli_team 
 
+
 url = 'https://www.basketball-reference.com/leagues/NBA_2021_standings.html'
 html_code_stored_in_a_file(url)
 
-#open the file
-with open('html_code.html') as html_file:
-    table = find_table()
-    headers = get_headers(table)
-    csv_file = open('nba_test.csv', 'w')
-    #create a writer
-    csv_writer = csv.writer(csv_file)
-    #write the headings to the csv file
-    csv_writer.writerow(headers)
-    r = find_rows(table)
+try:
+    #open the file
+    with open('html_code.html') as html_file:
+        table = find_table()
+        headers = get_headers(table)
+        csv_file = open('nba_test.csv', 'w')
+        #create a writer
+        csv_writer = csv.writer(csv_file)
+        #write the headings to the csv file
+        csv_writer.writerow(headers)
+        r = find_rows(table)
+        
+        for array in r:
+            b = (list(array))
+            #add the rows to the csv file
+            csv_writer.writerow(b)
+        
     
-    for array in r:
-        b = (list(array))
-        print(b)
-        #add the rows to the csv file
-        csv_writer.writerow(b)
-    
-   
-    
-    #close the file
+        
+        #close the file
     csv_file.close()
-
+    
+except Exception as e:
+        print("Remove the comments in the html_code.html file and save it!")
 
     
 
