@@ -3,7 +3,6 @@ import requests
 import os
 import pandas
 import csv
-import pprint
 import numpy as np
 
 
@@ -57,9 +56,17 @@ def find_rows(table):
         #print(b)
     return spli_team 
 
+def replace(html_file):
+    with open('html_code.html', 'r') as html_file:
+        file_content = html_file.read()
+        file_content= file_content.replace(" <!--", "")
+    with open('html_code.html', 'w') as html_file:
+        html_file.write(file_content)
+
 
 url = 'https://www.basketball-reference.com/leagues/NBA_2021_standings.html'
 html_code_stored_in_a_file(url)
+replace("html_file.html")
 
 try:
     #open the file
@@ -82,7 +89,7 @@ try:
         
         #close the file
     csv_file.close()
-    
+
 except Exception as e:
         print("Remove the comments in the html_code.html file and save it!")
 
