@@ -6,7 +6,7 @@ import csv
 import numpy as np
 
 class Get_data():
-    
+
     def __init__(self):
         self.season = input("Please enter the year of the season: ")
         self.url = 'https://www.basketball-reference.com/leagues/NBA_{}_standings.html'.format(self.season)
