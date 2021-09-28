@@ -1,7 +1,8 @@
+import sys
+print (sys.stdout.encoding)
+
 from bs4 import BeautifulSoup
 import requests
-import os
-import pandas
 import csv
 import numpy as np
 
@@ -63,29 +64,33 @@ class Get_data():
         with open('html_code.html', 'w') as html_file:
             html_file.write(file_content)
 
+    def create_csv(self):
+        #open the file
+        with open('html_code.html') as html_file:
+            table = data.find_table(html_file)
+            headers = data.get_headers(table)
+            csv_file = open('nba_test.csv', 'w')
+            #create a writer
+            csv_writer = csv.writer(csv_file)
+            #write the headings to the csv file
+            csv_writer.writerow(headers)
+            r = data.find_rows(table)
+        
+            for array in r:
+                b = (list(array))
+                #add the rows to the csv file
+                csv_writer.writerow(b)
+               
+        #close the file
+        csv_file.close()
+
 
 data=Get_data()
 data.html_code_stored_in_a_file()
 data.replace()
+data.create_csv()
 
- #open the file
-with open('html_code.html') as html_file:
-    table = data.find_table(html_file)
-    headers = data.get_headers(table)
-    csv_file = open('nba_test.csv', 'w')
-    #create a writer
-    csv_writer = csv.writer(csv_file)
-    #write the headings to the csv file
-    csv_writer.writerow(headers)
-    r = data.find_rows(table)
-        
-    for array in r:
-        b = (list(array))
-        #add the rows to the csv file
-        csv_writer.writerow(b)
-               
-#close the file
-csv_file.close()
+
 
 
     
